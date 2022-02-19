@@ -1,17 +1,33 @@
 public class Date {
 
+  //Constants
+  public static final Date START_DATE = new Date(15, 10, 1582);
+
   //Attributes
   private int day;
-
   private int month;
-
   private int year;
 
-  public static final class START_DATE {
+  //Constructors
+  public Date() {
+    this(
+      START_DATE.getStartDay(),
+      START_DATE.getStartMonth(),
+      START_DATE.getStartYear()
+    );
+  }
 
-    private static int day = 15;
-    private static int month = 10;
-    private static int year = 1582;
+  public Date(int day, int month, int year) {
+    setDay(day < getStartDay() ? getStartDay() : day);
+    setMonth(day < getStartMonth() ? getStartMonth() : month);
+    setYear(day < getStartYear() ? getStartYear() : year);
+  }
+
+  //Copy Constructor
+  public Date(Date otherDate) {
+    setDay(otherDate.day);
+    setMonth(otherDate.month);
+    setYear(otherDate.year);
   }
 
   //Setters
@@ -50,23 +66,6 @@ public class Date {
 
   public int getStartYear() {
     return START_DATE.year;
-  }
-
-  //Constructor
-  public void Date() {
-    this.Date(getStartDay(), getStartMonth(), getStartYear());
-  }
-
-  public void Date(int day, int month, int year) {
-    if (
-      day < getStartDay() && month < getStartMonth() && year < getStartYear()
-    ) {
-      Date(getStartDay(), getStartMonth(), getStartYear());
-    } else {
-      setDay(day);
-      setMonth(month);
-      setYear(year);
-    }
   }
 
   //Miscellaneous
