@@ -10,11 +10,7 @@ public class Date {
 
   //Constructors
   public Date() {
-    this(
-      START_DATE.getStartDay(),
-      START_DATE.getStartMonth(),
-      START_DATE.getStartYear()
-    );
+    this(START_DATE.day, START_DATE.month, START_DATE.year);
   }
 
   public Date(int day, int month, int year) {
@@ -56,15 +52,15 @@ public class Date {
     return this.year;
   }
 
-  public int getStartDay() {
+  public static int getStartDay() {
     return START_DATE.day;
   }
 
-  public int getStartMonth() {
+  public static int getStartMonth() {
     return START_DATE.month;
   }
 
-  public int getStartYear() {
+  public static int getStartYear() {
     return START_DATE.year;
   }
 
@@ -219,5 +215,10 @@ class Driver {
 
     System.out.println(myBirthday.toString(myBirthday));
     System.out.println(myBirthday.daysFromStartDate());
+
+    Date mySameBirthday = new Date(myBirthday);
+    mySameBirthday.setDay(10);
+    System.out.println(myBirthday.toString());
+    System.out.println(mySameBirthday.toString());
   }
 }
