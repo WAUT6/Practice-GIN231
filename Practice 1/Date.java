@@ -1,7 +1,7 @@
 public class Date {
 
   //Constants
-  public static final Date START_DATE = new Date(15, 10, 1582);
+  public static final int[] START_DATE = { 15, 10, 1582 };
 
   //Attributes
   private int day;
@@ -10,13 +10,35 @@ public class Date {
 
   //Constructors
   public Date() {
-    this(START_DATE.day, START_DATE.month, START_DATE.year);
+    this(START_DATE[0], START_DATE[1], START_DATE[2]);
   }
 
   public Date(int day, int month, int year) {
-    setDay(day < getStartDay() ? getStartDay() : day);
-    setMonth(day < getStartMonth() ? getStartMonth() : month);
-    setYear(day < getStartYear() ? getStartYear() : year);
+    if (year < getStartYear()) {
+      setDay(getStartDay());
+      setMonth(getStartMonth());
+      setYear(getStartYear());
+    } else if (year == getStartYear()) {
+      if (month < getStartMonth()) {
+        setDay(getStartDay());
+        setMonth(getStartMonth());
+        setYear(getStartYear());
+      } else if (month == getStartMonth()) {
+        if (day < getStartDay()) {
+          setDay(getStartDay());
+          setMonth(getStartMonth());
+          setYear(getStartYear());
+        } else {
+          setDay(day);
+          setMonth(month);
+          setYear(year);
+        }
+      }
+    } else {
+      setDay(day);
+      setMonth(month);
+      setYear(year);
+    }
   }
 
   //Copy Constructor
@@ -53,15 +75,15 @@ public class Date {
   }
 
   public static int getStartDay() {
-    return START_DATE.day;
+    return START_DATE[0];
   }
 
   public static int getStartMonth() {
-    return START_DATE.month;
+    return START_DATE[1];
   }
 
   public static int getStartYear() {
-    return START_DATE.year;
+    return START_DATE[2];
   }
 
   //Miscellaneous
@@ -85,7 +107,7 @@ public class Date {
     int totalLeapYears = 0;
 
     int totalNormalYears = 0;
-    for (int i = getStartYear(); i <= getYear(); i++) {
+    for (int i = getStartYear(); i < getYear(); i++) {
       if (isLeapYear(i)) {
         totalLeapYears++;
       } else {
@@ -209,16 +231,13 @@ class Driver {
 
   public static void main(String[] args) {
     Date myBirthday = new Date(30, 7, 2003);
-    myBirthday.setDay(30);
-    myBirthday.setMonth(7);
-    myBirthday.setYear(2003);
 
     System.out.println(myBirthday.toString(myBirthday));
     System.out.println(myBirthday.daysFromStartDate());
 
     Date mySameBirthday = new Date(myBirthday);
     mySameBirthday.setDay(10);
-    System.out.println(myBirthday.toString());
-    System.out.println(mySameBirthday.toString());
+    System.out.println(myBirthday.toString(myBirthday));
+    System.out.println(mySameBirthday.toString(mySameBirthday));
   }
 }
