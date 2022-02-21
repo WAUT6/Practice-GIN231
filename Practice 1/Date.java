@@ -230,14 +230,20 @@ public class Date {
 class Driver {
 
   public static void main(String[] args) {
-    Date myBirthday = new Date(30, 7, 2003);
+    Date myBirthday = new Date(29, 12, 2003);
 
     System.out.println(myBirthday.toString(myBirthday));
     System.out.println(myBirthday.daysFromStartDate());
 
     Date mySameBirthday = new Date(myBirthday);
-    mySameBirthday.setDay(10);
+    mySameBirthday.setDay(30);
+
+    System.out.println(myBirthday.daysBetween(mySameBirthday));
+
     System.out.println(myBirthday.toString(myBirthday));
     System.out.println(mySameBirthday.toString(mySameBirthday));
+
+    System.out.println(myBirthday.compareTo(mySameBirthday));
+    System.out.println(myBirthday.daysTillNextYear());
   }
 }
